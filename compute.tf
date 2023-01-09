@@ -45,12 +45,12 @@ resource "aws_instance" "n_main" {
 
 }
 
-resource "null_resource" "grafana_install"{
-  depends_on = [aws_instance.n_main]
-  provisioner "local-exec"{
-    command = "ansible-playbook -i aws_hosts --key-file /home/ubuntu/.ssh/nkey playbooks/main-playbook.yml"
-  }
-}
+# resource "null_resource" "grafana_install"{
+#   depends_on = [aws_instance.n_main]
+#   provisioner "local-exec"{
+#     command = "ansible-playbook -i aws_hosts --key-file /home/ubuntu/.ssh/nkey playbooks/main-playbook.yml"
+#   }
+# }
 
 output "instance_ips" {
   value = { for i in aws_instance.n_main[*] : i.tags.Name => "${i.public_ip}:3000" }
