@@ -8,5 +8,5 @@ terraform {
 
 provider "aws" {
   region = "us-west-1"
-  shared_credentials_files="/home/ubunutu/.aws/credentials"
+  shared_credentials_files=["/home/ubuntu/.aws/credentials"]
 }
