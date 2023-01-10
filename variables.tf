@@ -5,12 +5,12 @@ variable "vpc_cidr" {
 
 variable "access_ip" {
   type    = string
-  default = "188.2.126.185/32"
+  default = "0.0.0.0/0"
 }
 
 variable "cloud9_ip" {
   type    = string
-  default = "54.151.71.139/32"
+  default = "54.241.254.42/32"
 }
 
 variable "main_instance_type" {

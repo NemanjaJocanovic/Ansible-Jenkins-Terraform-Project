@@ -88,22 +88,3 @@
       name: prometheus
       enabled: yes
       state: started
-  # - name: Adding Jenkins apt-key
-  #   ansible.builtin.apt_key:
-  #     url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
-  #     state: present
-  # - name: Adding Jenins Repository
-  #   ansible.builtin.apt_repository:
-  #     repo: deb https://pkg.jenkins.io/debian-stable binary
-  #     filename: jenkins.list
-  #     state: present
-  # - name: Update apt cache and install grafana
-  #   ansible.builtin.apt:
-  #     name: jenkins
-  #     update_cache: yes
-  # - name: Make sure grafana is started and enabled
-  #   ansible.builtin.systemd:
-  #     name: jenkins
-  #     enabled: yes
-  #     state: started
-  
