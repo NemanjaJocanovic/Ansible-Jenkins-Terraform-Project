@@ -42,11 +42,11 @@ pipeline{
       }
     }
     stage('Validate Ansible'){
-      input{
-        when{
-        beforeInput true
-        branch "dev"
+      when{
+          beforeInput true
+          branch "dev"
       }
+      input{
         message " Do you want to run Ansible?"
         ok "Run Ansible."
       }
@@ -60,11 +60,11 @@ pipeline{
       }
     }
     stage('Validate Destroy'){
-      input{
-        when{
-        beforeInput true
-        branch "dev"
+      when{
+          beforeInput true
+          branch "dev"
       }
+      input{
         message " Do you want to destroy this plan?"
         ok "Destroy."
       }
