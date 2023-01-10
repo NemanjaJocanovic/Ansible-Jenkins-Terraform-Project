@@ -8,7 +8,7 @@ pipeline{
         sh 'terraform init -no-color'
       }
     }
-    stage('Plan'){
+    stage('Planning'){
       steps{
         sh 'export TF_IN_AUTOMATION=true'
         sh 'terraform plan'
