@@ -60,7 +60,7 @@ pipeline{
         ok "Run Ansible."
       }
       steps{
-        echo 'Ansible Accepted'
+        echo 'Ansible Accepted.'
       }
     }
     stage('Ansible'){
