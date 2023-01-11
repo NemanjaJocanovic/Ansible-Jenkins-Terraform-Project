@@ -66,7 +66,7 @@ pipeline{
       }
       input{
         message " Do you want to destroy this plan?"
-        ok "Destroy."
+        ok "Destroy!"
       }
       steps{
         echo 'Destroy Accepted'
