@@ -83,7 +83,7 @@ pipeline{
         ok "Destroy!"
       }
       steps{
-        echo 'Destroy Accepted'
+        echo 'Destroy Accepted.'
         }
       }
     stage('Destroy'){
