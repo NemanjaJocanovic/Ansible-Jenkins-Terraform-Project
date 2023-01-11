@@ -36,13 +36,20 @@ pipeline{
         sh 'terraform apply --auto-approve -no-color -var-file="$BRANCH_NAME.tfvars"'
       }
     }
-    stage('EC2 Wait'){
-      steps{
+    stage('Inventory') {
+      steps {
+        sh '''printf \\
+              "\\n$(terraform output -json instance_ips | jq -r \'.[]\')" \\
+              >> aws_hosts'''
+            }
+        }
+    stage('EC2 Wait') {
+      steps {
         sh '''aws ec2 wait instance-status-ok \\
-                    --instance-ids $(terraform show -json | jq -r \'.values\'.\'root_module\'.\'resources[] | select(.type == "aws_instance").values.id\') \\
-                    --region us-west-1'''
-      }
-    }
+              --instance-ids $(terraform output -json instance_ids | jq -r \'.[]\') \\
+              --region us-west-1'''
+            }
+        }
     stage('Validate Ansible'){
       when{
           beforeInput true
@@ -59,6 +66,11 @@ pipeline{
     stage('Ansible'){
       steps{
         ansiblePlaybook(credentialsId: 'ssh-ec2', inventory: 'aws_hosts', playbook: 'playbooks/main-playbook.yml')
+      }
+    }
+    stage('Test Ansible'){
+      steps{
+        ansiblePlaybook(credentialsId: 'ssh-ec2', inventory: 'aws_hosts', playbook: 'playbooks/test-node.yml')
       }
     }
     stage('Validate Destroy'){
